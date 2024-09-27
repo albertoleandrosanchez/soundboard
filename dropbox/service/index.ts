@@ -5,6 +5,12 @@ const BASE_SOUND_PATH = "/Sounds";
 //folders
 
 export const dbxListFolder = async (path: string) => {
+  const gdbx = fetch("http://localhost:3000/api/dbx/authorize", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   try {
     const list = await dbx.filesListFolder({
       path: path,
@@ -72,10 +78,19 @@ export const dbxRenameFolder = async (path: string, newName: string) => {
  * @param path
  * @returns [ { name: string, path: string, isFolder: boolean } ]
  */
+export const auth = async () => {
+  try {
+    const response = await dbx.
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
 export const dbxListFiles = async (path?: string) => {
   const mpath = path ? path : "";
   try {
     const list = await dbx.filesListFolder({
+      
       path: BASE_SOUND_PATH + mpath,
       // recursive: true,
     });
