@@ -65,7 +65,33 @@ export const dbxRenameFolder = async (path: string, newName: string) => {
   }
 };
 
-//files
+// files
+
+/**
+ * List files in a folder and the files in the subfolders
+ * @param path
+ * @returns [ { name: string, path: string, isFolder: boolean } ]
+ */
+export const dbxListFiles = async (path?: string) => {
+  const mpath = path ? path : "";
+  try {
+    const list = await dbx.filesListFolder({
+      path: BASE_SOUND_PATH + mpath,
+      // recursive: true,
+    });
+    const files = list.result.entries.map((entry) => {
+      return {
+        name: entry.name,
+        path: entry.path_display,
+        isFolder: entry[".tag"] === "folder",
+      };
+    });
+    return files;
+  } catch (error) {
+    console.error(error);
+  }
+};
+//file
 
 export const dbxUploadFile = async (path: string, file: File) => {
   try {
