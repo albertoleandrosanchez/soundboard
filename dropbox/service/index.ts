@@ -73,12 +73,6 @@ export const dbxRenameFolder = async (path: string, newName: string) => {
 
 // files
 
-/**
- * List files in a folder and the files in the subfolders
- * @param path
- * @returns [ { name: string, path: string, isFolder: boolean } ]
- */
-
 export const dbxListFiles = async (path?: string) => {
   const mpath = path ? path : "";
   try {
@@ -166,6 +160,28 @@ export const dbxRenameFile = async (path: string, newName: string) => {
     const response = await dbx.filesMoveV2({
       from_path: BASE_SOUND_PATH + path,
       to_path: BASE_SOUND_PATH + newName,
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const dbxTemporaryLink = async (
+  path: string,
+  type: "sound" | "ambient" = "sound"
+) => {
+  try {
+    if (type === "ambient") {
+      const response = await dbx.filesGetTemporaryLink({
+        path: "/Ambient" + "/" + path,
+      });
+      console.log(response);
+      return response;
+    }
+    const response = await dbx.filesGetTemporaryLink({
+      path: BASE_SOUND_PATH + "/" + path,
     });
     console.log(response);
     return response;

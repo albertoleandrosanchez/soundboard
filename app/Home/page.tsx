@@ -1,13 +1,15 @@
 import type { NextPage } from "next";
 import EffectsSection from "./sections/EffectsSection";
+import AmbientSection from "./sections/AmbientSection";
 
 const Home: NextPage = () => {
   return (
     <div>
-      {/* seccion de ambiental */}
+      <AmbientSection />
+
       {/* seccion de musica de combate */}
-      {/* seccion de efectos */}
-      <EffectsSection />
+
+      {/* <EffectsSection /> */}
     </div>
   );
 };
