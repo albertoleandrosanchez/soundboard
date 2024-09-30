@@ -10,7 +10,7 @@ const useAmbient = (path: string) => {
   useEffect(() => {
     const fetchAudioUrl = async () => {
       try {
-        const link = await dbxTemporaryLink(path, "ambient"); // Asegúrate de que esta función está definida
+        const link = await dbxTemporaryLink(path); // Asegúrate de que esta función está definida
         if (link) setAudioUrl(link.result.link);
       } catch (error) {
         console.error("Error fetching audio URL:", error);

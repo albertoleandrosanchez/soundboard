@@ -6,6 +6,7 @@ import useLongPress from "../hooks/useLongPress";
 
 type Props = {
   path: string;
+  name: string;
 };
 
 const AmbientSound = (props: Props) => {
@@ -19,11 +20,11 @@ const AmbientSound = (props: Props) => {
           <ControlsButton play={play} pause={pause} isPlaying={isPlaying} />
           <VolumeInput volume={volume} />
         </div>
-        {/* <div className="h-full overflow-hidden w-full">
+        <div className="h-full overflow-hidden w-full">
           <p className="text-primary flex text-ellipsis whitespace-nowrap text-sm">
-            Medieval Fantasy Tavern | D&D Fantasy Music and Ambience
+            {props.name.split(".")[0]}
           </p>
-        </div> */}
+        </div>
       </div>
     </div>
   );

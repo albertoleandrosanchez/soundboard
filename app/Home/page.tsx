@@ -9,7 +9,7 @@ const Home: NextPage = () => {
 
       {/* seccion de musica de combate */}
 
-      {/* <EffectsSection /> */}
+      <EffectsSection />
     </div>
   );
 };

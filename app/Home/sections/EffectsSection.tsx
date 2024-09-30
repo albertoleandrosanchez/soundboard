@@ -1,22 +1,35 @@
 "use client";
-import ButtonSound from "@/app/components/ButtonSound";
 import CategoryTitle from "@/app/components/CategoryTitle";
-import SoundButton from "@/app/components/SoundButton";
+import SoundContainer from "@/app/components/SoundContainer";
 import { dbxListFiles } from "@/dropbox/service";
+import { files } from "dropbox";
 import React, { useEffect } from "react";
+const BASE_SOUND_PATH = "/Sounds";
 
-type Props = {};
+const EffectsSection = () => {
+  const [files, setFiles] = React.useState<
+    | (
+        | files.FileMetadataReference
+        | files.FolderMetadataReference
+        | files.DeletedMetadataReference
+      )[]
+    | undefined
+  >(undefined);
 
-const EffectsSection = (props: Props) => {
   useEffect(() => {
     (async () => {
-      const files = await dbxListFiles();
-      console.log(files);
+      const res = await dbxListFiles(BASE_SOUND_PATH);
+      if (!res) return;
+      const { result } = res;
+      const mFiles = result?.entries.filter((file) => file[".tag"] === "file");
+      setFiles(mFiles);
     })();
   }, []);
+
   return (
     <section>
       <CategoryTitle className="text-3xl">Sonidos</CategoryTitle>
+      <SoundContainer sounds={files} />
     </section>
   );
 };

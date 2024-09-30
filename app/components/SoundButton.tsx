@@ -1,7 +1,7 @@
 "use client";
-import { useSound } from "@/hooks/useSound";
+import useSound from "../hooks/useSound";
 import { cx } from "class-variance-authority";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 type Props = {
   path: string;
@@ -9,33 +9,43 @@ type Props = {
 };
 
 const SoundButton = (props: Props) => {
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
-  const audioElement = useSound(props.path); // Use audioElement directly
+  const { play, pause, isPlaying, currentTime } = useSound(props.path);
+  const togglePlay = () => {
+    if (!isPlaying) {
+      play();
+    } else {
+      pause();
+    }
+  };
 
-  useEffect(() => {
-    (async () => {
-      setIsLoading(false); // Set loading state to false after audio loads
-    })();
-  }, [audioElement]); // Only run when audioElement changes
+  // mover letras a la izquierda en caso de que no entren en el width
 
   return (
-    <>
-      {isLoading ? ( // Display loading state while audio loads
-        <div className="h-16 w-16 bg-gray-200 animate-pulse rounded-sm">
-          Loading...
-        </div>
-      ) : (
-        <div
-          className={cx(`h-16 w-16 bg-gray-100 rounded-sm cursor-pointer`, {
-            "bg-gray-400": audioElement?.paused, // Use audioElement
-          })}
-          onClick={() => audioElement?.play()} // Access methods directly
-        >
-          <img src="/imgs/d20.png" alt="d20" className="h-full w-full" />
-        </div>
-      )}
-      <p>{JSON.stringify(audioElement?.paused)}</p>
-    </>
+    <div className="w-24 m-2">
+      <p
+        className="text-xs 
+      text-center
+      text-gray-500
+      font-semibold
+      h-8
+      overflow-hidden
+      overflow-ellipsis
+      "
+      >
+        {props.name.split(".")[0]}
+      </p>
+      <div
+        className={cx(
+          `h-24 bg-gray-100 rounded-sm cursor-pointer transition-all duration-1000  `,
+          {
+            "bg-gray-400 scale-105 border-primary border": isPlaying,
+          }
+        )}
+        onClick={() => togglePlay()} // Access methods directly
+      >
+        <img src="/imgs/d20.png" alt="d20" className="h-full w-full" />
+      </div>
+    </div>
   );
 };
 
