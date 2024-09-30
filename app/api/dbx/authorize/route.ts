@@ -12,6 +12,4 @@ const config = {
 
 const dbx = new Dropbox(config);
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  return dbx.filesListFolder();
-}
+export async function GET(req: NextApiRequest, res: NextApiResponse) {}

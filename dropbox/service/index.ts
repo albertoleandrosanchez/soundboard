@@ -78,27 +78,19 @@ export const dbxRenameFolder = async (path: string, newName: string) => {
  * @param path
  * @returns [ { name: string, path: string, isFolder: boolean } ]
  */
-export const auth = async () => {
-  try {
-    const response = await dbx.
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
-}
+
 export const dbxListFiles = async (path?: string) => {
   const mpath = path ? path : "";
   try {
     const list = await dbx.filesListFolder({
-      
       path: BASE_SOUND_PATH + mpath,
-      // recursive: true,
+      recursive: true,
     });
     const files = list.result.entries.map((entry) => {
       return {
-        name: entry.name,
         path: entry.path_display,
         isFolder: entry[".tag"] === "folder",
+        ...entry,
       };
     });
     return files;
@@ -115,6 +107,17 @@ export const dbxUploadFile = async (path: string, file: File) => {
       contents: file,
     });
     console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const getTemporaryLink = async (path: string) => {
+  try {
+    const response = await dbx.filesGetTemporaryLink({
+      path: path,
+    });
+
     return response;
   } catch (error) {
     console.error(error);
