@@ -1,4 +1,5 @@
 "use client";
+import ButtonSound from "@/app/components/ButtonSound";
 import CategoryTitle from "@/app/components/CategoryTitle";
 import { dbxListFiles } from "@/dropbox/service";
 import React, { useEffect } from "react";
@@ -15,6 +16,10 @@ const EffectsSection = (props: Props) => {
   return (
     <section>
       <CategoryTitle className="text-3xl">Sonidos</CategoryTitle>
+      <ButtonSound
+        path="otros/LA noire Correct jingle.mp3"
+        name="locking door"
+      />
     </section>
   );
 };
