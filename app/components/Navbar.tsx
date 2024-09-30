@@ -2,13 +2,12 @@ import { Separator } from "@/components/ui/separator";
 import { Metal_Mania } from "next/font/google";
 import React from "react";
 
-type Props = {};
 const metalMania = Metal_Mania({
   subsets: ["latin-ext"],
   weight: "400",
 });
 
-const Navbar = (props: Props) => {
+const Navbar = () => {
   return (
     <div>
       <nav className="h-8 bg-transparent flex justify-between px-2 my-2">

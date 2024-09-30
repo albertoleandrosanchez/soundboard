@@ -9,7 +9,7 @@ type Props = {
 };
 
 const SoundButton = (props: Props) => {
-  const { play, pause, isPlaying, currentTime } = useSound(props.path);
+  const { play, pause, isPlaying } = useSound(props.path);
   const togglePlay = () => {
     if (!isPlaying) {
       play();

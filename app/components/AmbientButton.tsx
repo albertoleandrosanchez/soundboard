@@ -2,7 +2,6 @@
 import { PauseCircle, PlayCircle, Volume } from "lucide-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import useAmbient from "../hooks/useAmbient";
-import useLongPress from "../hooks/useLongPress";
 
 type Props = {
   path: string;
@@ -11,7 +10,6 @@ type Props = {
 
 const AmbientSound = (props: Props) => {
   const { pause, play, isPlaying, volume } = useAmbient(props.path);
-  const [isFading, setIsFading] = useState(false);
 
   return (
     <div className="w-full h-10 bg-foreground rounded-md p-2 ">
