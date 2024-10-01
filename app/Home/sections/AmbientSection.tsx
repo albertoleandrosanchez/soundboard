@@ -1,9 +1,9 @@
 "use client";
-import CategoryTitle from "@/app/components/CategoryTitle";
+import CategoryTitle from "@/components/CategoryTitle";
 import { dbxListFiles } from "@/dropbox/service";
 import React, { useEffect } from "react";
 import { files } from "dropbox";
-import AmbientContainer from "@/app/components/AmbientContainer";
+import AmbientContainer from "@/components/AmbientContainer";
 
 const BASE_AMBIENT_PATH = "/Ambient";
 

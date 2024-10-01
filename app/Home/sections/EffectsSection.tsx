@@ -1,6 +1,6 @@
 "use client";
-import CategoryTitle from "@/app/components/CategoryTitle";
-import SoundContainer from "@/app/components/SoundContainer";
+import CategoryTitle from "@/components/CategoryTitle";
+import SoundContainer from "@/components/SoundContainer";
 import { dbxListFiles } from "@/dropbox/service";
 import { files } from "dropbox";
 import React, { useEffect } from "react";

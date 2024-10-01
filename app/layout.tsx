@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./components/theme-provider";
-import Navbar from "./components/Navbar";
+import { ThemeProvider } from "../components/theme-provider";
+import Navbar from "../components/Navbar";
+import { Provider } from "./Provider";
 
 const monserrat = Montserrat({
   subsets: ["latin-ext"],
@@ -20,17 +21,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${monserrat.className}  antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          <main className="px-8 max-sm:px-4">{children}</main>
-        </ThemeProvider>
-      </body>
+      <Provider>
+        <body className={`${monserrat.className}  antialiased`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
+            <main className="px-8 max-sm:px-4">{children}</main>
+          </ThemeProvider>
+        </body>
+      </Provider>
     </html>
   );
 }
